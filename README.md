@@ -5,6 +5,7 @@ In this game, you find yourself in a dark, damp dungeon. As you navigate through
 
 ## Features
 - **Rock-Paper-Scissors challenge**: Play Rock-Paper-Scissors against the dungeon monster.
+- **Save Stats**: Keep track of your win/loss/draw record.
 - **ASCII Art**: Enjoy fun and creative ASCII art representations of game elements.
 
 ## How to Play
@@ -13,4 +14,4 @@ In this game, you find yourself in a dark, damp dungeon. As you navigate through
 3. Use the following commands to play:
     - `rock`
     - `paper`
-    - `scissors`
+    - `scissor`
