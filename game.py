@@ -1,14 +1,19 @@
-import random, time
+import random, time, os
 
 
+#-------------------------------- function section
 def game(userinp, npcinp):
+    global wins, losses, draws
     if (userinp == "rock" and npcinp == "paper" or userinp == "paper" and npcinp == "scissor"
             or userinp == "scissor" and npcinp == "rock"):
         print("npc win")
+        losses += 1
     elif userinp == npcinp:
         print("Draw")
+        draws += 1
     else:
         print("player win")
+        wins += 1
 
 
 def art(move):
@@ -41,6 +46,7 @@ def art(move):
         """)
 
 
+#-------------------------------- narrative section
 print("hello this is my rock paper scissors game\nyou may type either of these three options"
       " to play your hand\nenter anything to begin.")
 input()
@@ -60,7 +66,20 @@ print("But then, to your utter surprise, the monster stops just a few feet away.
       "who are you to refuse?\n"
       "With a sigh of relief, you put away your sword and get ready for the most intense\n"
       "rock-paper-scissors match of your life.\n")
-#begin gameplay
+
+#-------------------------------- gameplay section
+wins = 0
+losses = 0
+draws = 0
+
+if os.path.exists("game_stats.txt"):
+    with open("game_stats.txt", "r") as file:
+        stats = file.readlines()
+        if len(stats) == 3:
+            wins = int(stats[0].strip())
+            losses = int(stats[1].strip())
+            draws = int(stats[2].strip())
+
 choices = ["rock", "paper", "scissor"]
 choice = input("what do you choose: ")
 while choice != "run away":
@@ -77,6 +96,7 @@ while choice != "run away":
         game(choice, npcchoice)
         choice = input("what do you choose to play now or run away: ")
 
+#-------------------------------- end section
 print(
     "                        ,////,\n"
     "                        /// 6|\n"
@@ -95,4 +115,8 @@ print(
     "                            `\\ \\\n"
     "                              \\_\\__\n"
     "                               \\___)\n")
-print("thanks for playing dawg")
+print("Thanks for playing dawg")
+
+with open("game_stats.txt", "w") as file:
+    file.write(f"{wins}\n{losses}\n{draws}\n")
+print(f"your wins are: {wins}\nyour losses are: {losses}\nyour draws are: {draws}\n")
